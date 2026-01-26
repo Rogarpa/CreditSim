@@ -6,7 +6,7 @@ from fastapi.encoders import jsonable_encoder
 
 class AmortizationRepository():
 
-    def create_amortization(amortization_request: AmortizationRequest,amortization_periods: AmortizationPeriods):
+    async def create_amortization(amortization_request: AmortizationRequest,amortization_periods: AmortizationPeriods):
         session = get_session()
         amortization_db = AmortizationDB(
             amount=amortization_request.monto,

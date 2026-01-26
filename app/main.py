@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.models.dtos.AmortizationRequest import AmortizationRequest
 
-from fastapi import FastAPI
+from fastapi import FastAPI, BackgroundTasks
 from app.connectors.SQLiteConnector import create_db_and_tables
 from app.services.LoanService import LoanService
 
@@ -16,7 +16,7 @@ def health():
 
 
 @app.post("/simulate")
-async def create_item(amortization_request: AmortizationRequest):
-    amortization_table = LoanService().get_amortization_french_periods(amortization_request)
+async def create_item(amortization_request: AmortizationRequest, background_tasks: BackgroundTasks):
+    amortization_table = await LoanService().get_amortization_french_periods(amortization_request, background_tasks)
     return amortization_table
 
