@@ -1,5 +1,6 @@
 from app.models.dtos.AmortizationCalculate import AmortizationCalculate
-class AmortizationPeriods:
+
+class AmortizationPeriods():
     amortization_periods: list[AmortizationCalculate]
     def __init__(self) -> None:
         self.amortization_periods = []

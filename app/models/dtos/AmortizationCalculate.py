@@ -1,6 +1,5 @@
-from dataclasses import dataclass
 
-class AmortizationCalculate:
+class AmortizationCalculate():
     actual_period: int 
     period_payment_amount: float
     
