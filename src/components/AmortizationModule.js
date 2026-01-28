@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
 import {AmortizationForm} from './AmortizationForm'
+import {useLocalStorage} from '../hooks/useLocalStorage'
 function AmortizationModule(){
 
-  const [monto, setMonto] = useState(0);
-  const [tasaAnual, setTasaAnual] = useState(0);
-  const [plazoMeses, setPlazoMeses] = useState(0);
+  const [monto, setMonto] = useLocalStorage("monto", "");
+  const [tasaAnual, setTasaAnual] = useLocalStorage("tasaAnual", "");
+  const [plazoMeses, setPlazoMeses] = useLocalStorage("plazoMeses", "");
   const [table, setTable] = useState({});
+  
 
   async function getAmortizationTable (event) {
     event.preventDefault();
