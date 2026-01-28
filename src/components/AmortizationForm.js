@@ -1,4 +1,4 @@
-export function AmortizationForm({monto, setMonto, tasaAnual, setTasaAnual, plazoMeses, setPlazoMeses, getAmortizationTable}){
+export function AmortizationForm({ monto, setMonto, tasaAnual, setTasaAnual, plazoMeses, setPlazoMeses, getAmortizationTable }){
     return(
         <div>
             <h2>Formulario de Cálculo de Préstamo</h2>

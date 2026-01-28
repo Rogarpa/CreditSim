@@ -1,15 +1,23 @@
-import React from 'react';
-import {AmortizationForm} from './AmortizationForm'
-import {useLocalStorage} from '../hooks/useLocalStorage'
-import {Table} from '../components/Table'
+import React, { useState, useEffect } from 'react';
+import { AmortizationForm } from './AmortizationForm'
+import { useLocalStorage } from '../hooks/useLocalStorage'
+import { Table } from '../components/Table'
 
 function AmortizationModule(){
 
   const [monto, setMonto] = useLocalStorage("monto", "");
   const [tasaAnual, setTasaAnual] = useLocalStorage("tasaAnual", "");
   const [plazoMeses, setPlazoMeses] = useLocalStorage("plazoMeses", "");
-  const [table, setTable] = useLocalStorage("table",{});
-  
+  const [table, setTable] = useLocalStorage("table",undefined);
+  const [firstReactCycle, setFirstReactCycle] = useState(true);
+
+  useEffect(() => {
+    if(firstReactCycle){
+      setFirstReactCycle(false)
+      return
+    }
+    setTable(undefined)
+  },[monto, firstReactCycle])
 
   async function getAmortizationTable (event) {
     event.preventDefault();
@@ -49,13 +57,13 @@ function AmortizationModule(){
       setTasaAnual = {setTasaAnual}
       getAmortizationTable = {getAmortizationTable}
       />
-      <p>{table?(JSON.stringify(table)):"loading"}</p>
-      <p>{monto}</p>
-      <p>{tasaAnual}</p>
-      <p>{plazoMeses}</p>
-      <Table
+      <p>{!table? "":(
+        <Table
         nodes = {table.amortization_periods}
-      />
+        />)}
+      </p>
+       
+      
       
     </div>
     
