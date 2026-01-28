@@ -16,5 +16,10 @@ export function Table({nodes}){
         renderCell: ((item) => item[key])
       }));
     
-    return <CompactTable columns={COLUMNS} data={{nodes}} theme={useTheme(getTheme())}/>;
+    return (
+      <div className='amortization-table'>
+        <CompactTable columns={COLUMNS} data={{nodes}} theme={useTheme(getTheme())} 
+        />;
+      </div>
+    )
 };

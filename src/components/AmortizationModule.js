@@ -8,7 +8,7 @@ function AmortizationModule(){
   const [monto, setMonto] = useLocalStorage("monto", "");
   const [tasaAnual, setTasaAnual] = useLocalStorage("tasaAnual", "");
   const [plazoMeses, setPlazoMeses] = useLocalStorage("plazoMeses", "");
-  const [table, setTable] = useLocalStorage("table",undefined);
+  const [table, setTable] = useState(undefined);
   const [firstReactCycle, setFirstReactCycle] = useState(true);
 
   useEffect(() => {
@@ -28,13 +28,15 @@ function AmortizationModule(){
       "plazo_meses": plazoMeses
     }
     
-    fetch('http://localhost:8000/simulate', {
+    fetch('http://creditaria-technical-test.fly.dev/simulate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          ''
         },
         body: JSON.stringify(amortizationData),
       }).then((data) => {
+        console.log(data)
         return data.json()
       }).then((data) => setTable(data)).catch(error => {
       console.log(error);
@@ -47,7 +49,7 @@ function AmortizationModule(){
   }
 
   return (
-    <div>
+    <div className='amortization-container'>
       <AmortizationForm 
       monto = {monto}
       setMonto = {setMonto}
@@ -57,11 +59,11 @@ function AmortizationModule(){
       setTasaAnual = {setTasaAnual}
       getAmortizationTable = {getAmortizationTable}
       />
-      <p>{!table? "":(
-        <Table
+
+      {!table? "":(
+      <Table
         nodes = {table.amortization_periods}
-        />)}
-      </p>
+      />)}
        
       
       
