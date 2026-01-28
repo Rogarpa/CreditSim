@@ -1,12 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import {AmortizationForm} from './AmortizationForm'
 import {useLocalStorage} from '../hooks/useLocalStorage'
+import {Table} from '../components/Table'
+
 function AmortizationModule(){
 
   const [monto, setMonto] = useLocalStorage("monto", "");
   const [tasaAnual, setTasaAnual] = useLocalStorage("tasaAnual", "");
   const [plazoMeses, setPlazoMeses] = useLocalStorage("plazoMeses", "");
-  const [table, setTable] = useState({});
+  const [table, setTable] = useLocalStorage("table",{});
   
 
   async function getAmortizationTable (event) {
@@ -17,9 +19,8 @@ function AmortizationModule(){
       "tasa_anual": tasaAnual,
       "plazo_meses": plazoMeses
     }
-    let response
     
-    response = fetch('http://localhost:8000/simulate', {
+    fetch('http://localhost:8000/simulate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,6 +53,9 @@ function AmortizationModule(){
       <p>{monto}</p>
       <p>{tasaAnual}</p>
       <p>{plazoMeses}</p>
+      <Table
+        nodes = {table.amortization_periods}
+      />
       
     </div>
     
