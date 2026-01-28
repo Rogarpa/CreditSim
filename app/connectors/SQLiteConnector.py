@@ -1,7 +1,7 @@
 from sqlmodel import SQLModel,create_engine, Session
 
 # SQLite database URL (you can change this to use PostgreSQL, MySQL, etc.)
-DATABASE_URL = "sqlite:///./test.db"
+DATABASE_URL = "postgres:///./test.db"
 
 # Create an engine and connect to the SQLite database
 engine = create_engine(DATABASE_URL, echo=True)
