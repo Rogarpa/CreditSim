@@ -4,8 +4,6 @@ from app.utils.Financial import Financial
 from app.repositories.AmortizationRepository import AmortizationRepository
 from app.services.ScoringService import ScoringService
 from app.services.ServiceWrapper import ServiceWrapper
-from app.exceptions.ScoringException import ScoringException
-import asyncio
 import logging
 
 logging.basicConfig(level=logging.ERROR)
@@ -33,3 +31,6 @@ class LoanService:
         background_tasks.add_task(service_wrapper.execute_service)
       
         return amortization_periods
+    
+    async def get_amortization_french_list():
+        return await AmortizationRepository.list_amortization()

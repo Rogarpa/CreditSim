@@ -1,15 +1,17 @@
-from fastapi import FastAPI
 from app.models.dtos.AmortizationRequest import AmortizationRequest
 
 from fastapi import FastAPI, BackgroundTasks
+from fastapi import Depends, HTTPException
+from sqlalchemy.orm import Session
+from app.connectors.SQLiteConnector import get_session
 from app.connectors.SQLiteConnector import create_db_and_tables
+from app.models.dtos.AmortizationDB import AmortizationDB
+from app.models.dtos.AmortizationRequestDB import AmortizationRequestDB
 from app.services.LoanService import LoanService
 from fastapi.middleware.cors import CORSMiddleware
 from time import sleep
 create_db_and_tables()
 app = FastAPI(title="CreditSim")
-
-
 
 # Define the list of allowed origins (e.g., your frontend application's URL)
 origins = [
@@ -29,10 +31,13 @@ app.add_middleware(
 def health():
     return {"status": "ok"}
 
-
-
 @app.post("/simulate")
-async def create_item(amortization_request: AmortizationRequest, background_tasks: BackgroundTasks):
+async def simulate(amortization_request: AmortizationRequest, background_tasks: BackgroundTasks):
     amortization_table = await LoanService().get_amortization_french_periods(amortization_request, background_tasks)
     return amortization_table
+
+
+@app.get("/simulate", response_model=list[AmortizationDB])
+async def get_simulations():
+    return await LoanService.get_amortization_french_list();
 

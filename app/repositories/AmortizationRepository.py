@@ -24,3 +24,15 @@ class AmortizationRepository():
         finally:
             session.close()
         return True
+    
+    async def list_amortization():
+        session = get_session()
+        list_amortization = []
+        try:
+            list_amortization = session.query(AmortizationDB).all()
+        except:
+            return []
+        finally:
+            session.close()
+        
+        return list_amortization
