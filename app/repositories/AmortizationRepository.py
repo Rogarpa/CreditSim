@@ -1,6 +1,6 @@
 from app.dtos.AmortizationPeriods import AmortizationPeriods
 from app.dtos.AmortizationRequest import AmortizationRequest
-from app.models.dtos.AmortizationDB import AmortizationDB
+from app.models.AmortizationDB import AmortizationDB
 from app.connectors.SQLiteConnector import get_session, create_db_and_tables
 from fastapi.encoders import jsonable_encoder
 
