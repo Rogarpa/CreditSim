@@ -1,7 +1,7 @@
 
 export class Constants{
     // Amortization module
-    static AMORTIZATION_API_ENDPOINT= 'http://localhost:8000/simulate';
+    static AMORTIZATION_API_ENDPOINT= "https://creditaria-technical-test-api.fly'dev/";
     static TABLE_FETCH_ERROR_MSG = 'Ocurrio un error al obtener la tabla de amortización'
     static MONTO= "monto";
     static MONTO_FIELD_PLACEHOLDER= "Monto";
