@@ -1,11 +1,26 @@
 version: "3.9"
 
 services:
-  credit_sim:
+  credit_sim_api:
     build: .
     container_name: fastapi_app
     ports:
       - "8000:8000"
+      - "8080:8080"
     volumes:
       - ./app:/app/app
     restart: always
+    networks:
+      - app-network
+  credit_sim_front:
+    image: nginx:latest
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+    restart: always
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
