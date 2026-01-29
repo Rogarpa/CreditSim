@@ -19,3 +19,6 @@ MIN_DELAY_TIME = 3
 MAX_DELAY_TIME = 3
 FAILURE_PROBABILITY = 0.1
 SCORING_FAILURE_MESSAGE = "Failure on scoring service"
+
+# Connectors
+DATABASE_SQLITE_CONNECTION_URL = "sqlite:///./test.db"
