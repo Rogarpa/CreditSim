@@ -40,17 +40,17 @@ function AmortizationModule(){
         body: JSON.stringify(amortizationData),
       }).then((response) => {
         if(!response.ok){
-          throw new Error("Amortization endpoint unsuccessfull response")
+          throw new Error(Constants.TABLE_ENDPOINT_ERROR_MSG.toString())
         }
         return response.json()
       }).then((data) => {
         if(!data || !AmortizationResponseSchema.safeParse(data).success){
-          throw new Error(Constants.TABLE_FETCH_ERROR_MSG.toString())  
+          throw new Error(Constants.TABLE_DATA_ERROR_MSG.toString())  
         }
         setTable(data.amortization_periods)
         
       }).catch(error => {
-        setTableError({msg: error.message})
+        setTableError({msg: Constants.TABLE_FETCH_ERROR_MSG.toString()})
     });
     setMonto(Constants.MONTO_INITIAL_VALUE)
     setTasaAnual(Constants.MONTO_INITIAL_VALUE)
