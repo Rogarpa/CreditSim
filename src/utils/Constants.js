@@ -2,12 +2,12 @@
 export class Constants{
     // Amortization module
     static AMORTIZATION_API_ENDPOINT= 'http://localhost:8000/simulate';
-
+    static TABLE_FETCH_ERROR_MSG = 'Ocurrio un error al obtener la tabla de amortización'
     static MONTO= "monto";
     static MONTO_FIELD_PLACEHOLDER= "Monto";
     static MONTO_INITIAL_VALUE= "";
     static TASA_ANUAL= "tasa_anual";
-    static TASA_ANUAL_FIELD_PLACEHOLDER= "Tasa anual";
+    static TASA_ANUAL_FIELD_PLACEHOLDER= "Tasa anual (%)";
     static TASA_ANUAL_INITIAL_VALUE= "";
     static PLAZO_MESES= "plazo_meses";
     static PLAZO_MESES_FIELD_PLACEHOLDER= "Plazo en meses";
