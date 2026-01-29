@@ -14,6 +14,7 @@ RUN npm install -g serve
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy Fastapi app and entrypoint script
 COPY app ./app
 COPY ./start.sh /start.sh
 RUN chmod +x /start.sh
