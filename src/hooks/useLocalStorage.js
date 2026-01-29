@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Constants from'../utils/Constants';
 
 export function useLocalStorage (key, initialValue){
     const getInitialValue = (() => {
@@ -16,7 +17,7 @@ export function useLocalStorage (key, initialValue){
             setStoredValue(value)
             window.localStorage.setItem(key, JSON.stringify(value))
         }catch(error){
-            throw new Error("Local storage writing unavailable")
+            throw new Error(Constants.USE_LOCAL_STORAGE_ERROR_MSG.toString())
         }
     }
     return [storedValue, setValue]
