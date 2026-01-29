@@ -6,10 +6,8 @@ from sqlalchemy.orm import Session
 from app.connectors.SQLiteConnector import get_session
 from app.connectors.SQLiteConnector import create_db_and_tables
 from app.models.dtos.AmortizationDB import AmortizationDB
-from app.dtos.AmortizationRequestDB import AmortizationRequestDB
 from app.services.LoanService import LoanService
 from fastapi.middleware.cors import CORSMiddleware
-from time import sleep
 create_db_and_tables()
 app = FastAPI(title="CreditSim")
 
@@ -40,3 +38,6 @@ async def simulate(amortization_request: AmortizationRequest, background_tasks: 
 async def get_simulations():
     return await LoanService.get_amortization_french_list();
 
+@app.options("/simulate")
+async def get_options_simulate():
+    return ""
