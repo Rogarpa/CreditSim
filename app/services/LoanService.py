@@ -10,13 +10,13 @@ logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
 from fastapi import BackgroundTasks
-class LoanService:
+class LoanService():
     async def get_amortization_french_periods(self, amortization_request: AmortizationRequest, background_tasks: BackgroundTasks):
         amortization_periods = AmortizationPeriods()
         financial = Financial()
 
         if(amortization_request.monto <=0 or amortization_request.tasa_anual <=0 or amortization_request.plazo_meses <=0):
-            return amortization_periods
+            raise ValueError("All parameters should be positive")
         
         last_period_amortization = financial.calculate_first_period_french_amortization(amortization_request.monto, amortization_request.tasa_anual, amortization_request.plazo_meses)
         amortization_periods.amortization_periods.append(last_period_amortization)
@@ -32,5 +32,5 @@ class LoanService:
       
         return amortization_periods
     
-    async def get_amortization_french_list():
+    async def get_amortization_french_list(self):
         return await AmortizationRepository.list_amortization()

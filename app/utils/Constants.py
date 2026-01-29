@@ -2,9 +2,9 @@
 APP_NAME = "CreditSim"
 
 # CORS Middleware
-ALLOW_METHODS = "*"
+ALLOW_METHODS = "GET,POST,OPTIONS"
 ALLOW_HEADERS = "*"
-ALLOW_ORIGINS = ["*"]
+ALLOW_ORIGINS = ["https://creditaria-technical-test.fly.dev/"]
 
 # Amortization French Calculus
 FIRST_PERIOD = 0
