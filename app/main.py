@@ -1,5 +1,6 @@
 from app.dtos.AmortizationRequest import AmortizationRequest
 from app.dtos.AmortizationResponse import AmortizationResponse
+from app.utils.Constants import *
 
 from fastapi import FastAPI, BackgroundTasks
 from app.connectors.SQLiteConnector import create_db_and_tables
@@ -7,21 +8,15 @@ from app.services.LoanService import LoanService
 from app.mappers.AmortizationMapper import AmortizationMapper
 from fastapi.middleware.cors import CORSMiddleware
 create_db_and_tables()
-app = FastAPI(title="CreditSim")
-
-origins = [
-        "*"
-
-]
+app = FastAPI(title=APP_NAME)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=ALLOW_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=[ALLOW_METHODS],
+    allow_headers=[ALLOW_HEADERS],
 )
-
 @app.get("/")
 def health():
     return {"status": "ok"}

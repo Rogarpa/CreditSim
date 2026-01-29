@@ -26,8 +26,8 @@ class LoanService:
             amortization_periods.amortization_periods.append(last_period_amortization)
         
         background_tasks.add_task(AmortizationRepository.create_amortization,amortization_request, amortization_periods)
-      
-        service_wrapper = ServiceWrapper((lambda e : logger.info(e)), ScoringService().notificate)
+    
+        service_wrapper = ServiceWrapper((lambda e : logger.error(e)), ScoringService().notificate)
         background_tasks.add_task(service_wrapper.execute_service)
       
         return amortization_periods
