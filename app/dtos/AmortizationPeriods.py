@@ -1,4 +1,4 @@
-from app.models.dtos.AmortizationCalculate import AmortizationCalculate
+from app.dtos.AmortizationCalculate import AmortizationCalculate
 
 class AmortizationPeriods():
     amortization_periods: list[AmortizationCalculate]

@@ -1,4 +1,4 @@
-from app.models.dtos.AmortizationRequest import AmortizationRequest
+from app.dtos.AmortizationRequest import AmortizationRequest
 
 from fastapi import FastAPI, BackgroundTasks
 from fastapi import Depends, HTTPException
@@ -6,14 +6,13 @@ from sqlalchemy.orm import Session
 from app.connectors.SQLiteConnector import get_session
 from app.connectors.SQLiteConnector import create_db_and_tables
 from app.models.dtos.AmortizationDB import AmortizationDB
-from app.models.dtos.AmortizationRequestDB import AmortizationRequestDB
+from app.dtos.AmortizationRequestDB import AmortizationRequestDB
 from app.services.LoanService import LoanService
 from fastapi.middleware.cors import CORSMiddleware
 from time import sleep
 create_db_and_tables()
 app = FastAPI(title="CreditSim")
 
-# Define the list of allowed origins (e.g., your frontend application's URL)
 origins = [
         "*"
 

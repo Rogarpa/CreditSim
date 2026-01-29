@@ -1,5 +1,5 @@
-from app.models.dtos.AmortizationPeriods import AmortizationPeriods
-from app.models.dtos.AmortizationRequest import AmortizationRequest
+from app.dtos.AmortizationPeriods import AmortizationPeriods
+from app.dtos.AmortizationRequest import AmortizationRequest
 from app.utils.Financial import Financial
 from app.repositories.AmortizationRepository import AmortizationRepository
 from app.services.ScoringService import ScoringService
