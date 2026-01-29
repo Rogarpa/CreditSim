@@ -14,8 +14,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOW_ORIGINS,
     allow_credentials=True,
-    allow_methods=[ALLOW_METHODS],
-    allow_headers=[ALLOW_HEADERS],
+    allow_methods=ALLOW_METHODS,
+    allow_headers=ALLOW_HEADERS,
 )
 @app.get("/")
 def health():
