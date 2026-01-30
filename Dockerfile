@@ -3,11 +3,6 @@ FROM python:3.11-slim
 # Set directory
 WORKDIR /app
 
-# Install system dependencies for both FastAPI and Npm (Serve server)
-RUN apt-get update && apt-get install -y \
-    sqlite3 \
-    libsqlite3-dev    
-
 # Install fastapi libraries
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt

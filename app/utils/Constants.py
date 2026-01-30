@@ -1,3 +1,9 @@
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+
+
 # App
 APP_NAME = "CreditSim"
 
@@ -21,4 +27,11 @@ FAILURE_PROBABILITY = 0.1
 SCORING_FAILURE_MESSAGE = "Failure on scoring service"
 
 # Connectors
-DATABASE_SQLITE_CONNECTION_URL = "sqlite:///./test.db"
+
+USER = os.getenv("POSTGREDB_USER")
+PASSWORD = os.getenv("POSTGREDB_PASSWORD")
+HOST = os.getenv("POSTGREDB_HOST")
+PORT = os.getenv("POSTGREDB_PORT")
+DBNAME = os.getenv("POSTGREDB_NAME")
+
+DATABASE_SQLITE_CONNECTION_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"

@@ -10,4 +10,5 @@ services:
     volumes:
       - ./app:/app/app
     restart: always
-    
+    env_file:
+      - .env

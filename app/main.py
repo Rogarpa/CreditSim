@@ -7,7 +7,6 @@ from app.connectors.SQLiteConnector import create_db_and_tables
 from app.services.LoanService import LoanService
 from app.mappers.AmortizationMapper import AmortizationMapper
 from fastapi.middleware.cors import CORSMiddleware
-create_db_and_tables()
 app = FastAPI(title=APP_NAME)
 
 app.add_middleware(
