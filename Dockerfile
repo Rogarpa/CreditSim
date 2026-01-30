@@ -1,22 +1,9 @@
-FROM python:3.11-slim
+FROM node:20-alpine
 
-# Set directory
 WORKDIR /app
+RUN npm install -g serve
 
-# Install system dependencies for both FastAPI and Npm (Serve server)
-RUN apt-get update && apt-get install -y \
-    sqlite3 \
-    libsqlite3-dev    
+COPY ./html ./static_front
 
-# Install fastapi libraries
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy Fastapi app and entrypoint script
-COPY app ./app
-
-# EXPOSE 8000 port
-EXPOSE 8000
-
-# Execute script for multi entrypoint
-CMD uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+EXPOSE 5000
+CMD ["serve", "-s", "static_front", "-l", "5000"]
