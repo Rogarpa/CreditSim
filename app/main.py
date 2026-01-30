@@ -2,12 +2,15 @@ from app.dtos.AmortizationRequest import AmortizationRequest
 from app.dtos.AmortizationResponse import AmortizationResponse
 from app.utils.Constants import *
 
-from fastapi import FastAPI, BackgroundTasks, HTTPException
+from fastapi import FastAPI, BackgroundTasks, HTTPException, Depends
 from app.connectors.SQLiteConnector import create_db_and_tables
 from app.services.LoanService import LoanService
 from app.mappers.AmortizationMapper import AmortizationMapper
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title=APP_NAME)
+
+def get_loan_service() -> LoanService:
+    return LoanService()
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,8 +24,7 @@ def health():
     return {"status": "ok"}
 
 @app.post("/simulate")
-async def simulate(amortization_request: AmortizationRequest, background_tasks: BackgroundTasks):
-    loan_service = LoanService()
+async def simulate(amortization_request: AmortizationRequest, background_tasks: BackgroundTasks, loan_service: LoanService = Depends(get_loan_service)):
     try:
         amortization_table = await loan_service.get_amortization_french_periods(amortization_request, background_tasks)
         return amortization_table
@@ -32,8 +34,7 @@ async def simulate(amortization_request: AmortizationRequest, background_tasks: 
 
 
 @app.get("/simulate", response_model=list[AmortizationResponse])
-async def get_simulations():
-    loan_service = LoanService()
+async def get_simulations(loan_service: LoanService = Depends(get_loan_service)):
     return map(AmortizationMapper.amortizationdb_to_amortizationresponse, await loan_service.get_amortization_french_list())
 
 @app.options("/simulate")
