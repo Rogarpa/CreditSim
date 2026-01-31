@@ -11,6 +11,7 @@ APP_NAME = "CreditSim"
 ALLOW_METHODS = ["OPTIONS", "POST", "GET"]
 ALLOW_HEADERS = ["*"]
 ALLOW_ORIGINS = ["https://creditaria-technical-test.fly.dev"]
+# ALLOW_ORIGINS = ["http://localhost:3000"]
 
 # Amortization French Calculus
 FIRST_PERIOD = 0
